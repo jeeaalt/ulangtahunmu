@@ -11,32 +11,36 @@ body {
   font-family: Arial, sans-serif;
   text-align: center;
   background: linear-gradient(135deg, #ff758c, #ff7eb3);
-  overflow: hidden;
   color: white;
+  overflow-y: auto;
 }
 
 .container {
   position: relative;
-  top: 25vh;
+  margin: 50px auto;
+  max-width: 90%;
   z-index: 2;
 }
 
 h1 {
-  font-size: 40px;
+  font-size: 6vw;
+  margin-bottom: 15px;
 }
 
 p {
-  font-size: 20px;
+  font-size: 3.5vw;
+  line-height: 1.4;
+  margin: 10px 0;
 }
 
 button {
-  padding: 15px 30px;
-  font-size: 18px;
+  padding: 12px 25px;
+  font-size: 16px;
   border: none;
   border-radius: 30px;
   cursor: pointer;
   background: white;
-  color: #ff4e88;
+  color: #702963;
   font-weight: bold;
   transition: 0.3s;
 }
@@ -53,7 +57,7 @@ button:hover {
 .balloon {
   position: absolute;
   bottom: -150px;
-  font-size: 50px;
+  font-size: 40px;
   animation: floatUp 6s linear infinite;
 }
 
@@ -64,7 +68,7 @@ button:hover {
 
 /* Kue */
 .cake {
-  font-size: 80px;
+  font-size: 12vw;
   animation: bounce 1s infinite alternate;
 }
 
@@ -77,6 +81,22 @@ canvas {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1;
+}
+@media (max-width: 480px) {
+  h1 {
+    font-size: 8vw;
+  }
+  p {
+    font-size: 4vw;
+  }
+  button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  .cake {
+    font-size: 20vw;
+  }
 }
 </style>
 </head>
@@ -184,3 +204,4 @@ window.addEventListener("resize", () => {
 
 </body>
 </html>
+
