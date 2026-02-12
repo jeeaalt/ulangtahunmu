@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Level Up Day, Khaira 🎉</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  overflow: hidden;
+  color: white;
+}
+
+.container {
+  position: relative;
+  top: 25vh;
+  z-index: 2;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+p {
+  font-size: 20px;
+}
+
+button {
+  padding: 15px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  background: white;
+  color: #ff4e88;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+.hidden {
+  display: none;
+}
+
+/* Balon */
+.balloon {
+  position: absolute;
+  bottom: -150px;
+  font-size: 50px;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-120vh); }
+}
+
+/* Kue */
+.cake {
+  font-size: 80px;
+  animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-15px); }
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="startScreen">
+  <h1>Teruntuk Kamuu 💌</h1>
+  <button onclick="startParty()">Klik di Sini 🎁</button>
+</div>
+
+<div class="container hidden" id="content">
+  <h1>❤️Selamat Ulang Tahun, Khaira 🎂</h1>
+
+  <p>Semoga panjang umur, sehat selalu, dan makin sukses yaaa! 🚀</p>
+
+  <p>Di hari bertambahnya usia ini, semoga kamu bisa menjadi pribadi yang lebih baik lagi, ya. 
+  Datang keberkahan penuh buat kamu, selalu diberi kesehatan, hati yang tenang, dan langkah yang dimudahkan dalam setiap rencana baikmu. 
+  Semoga kebahagiaan selalu menyertaimu.</p>
+
+  <p>Semoga di usia yang baru, kamu bisa makin kuat dan makin percaya sama diri sendiri. 
+  Semoga apa pun yang kamu impikan, satu per satu bisa terwujud. Aamiin 🤍</p>
+
+  <p>Bahagia terus, Khai 💗 Dan jaga kesehatan selalu.  
+  Sukses dan semangat terus, ya, jalani harinya. 
+  Aku bakal selalu doain yang terbaik buat kamu✨</p> 
+
+  <p><b>Sekali lagi, Selamat Ulang Tahun, Khai 🎉</b></p>
+
+  <div class="cake">🎂</div>
+</div>
+
+<canvas id="confetti"></canvas>
+
+<script>
+function startParty() {
+  document.getElementById("startScreen").classList.add("hidden");
+  document.getElementById("content").classList.remove("hidden");
+  createBalloons();
+  startConfetti();
+}
+
+/* BALON */
+function createBalloons() {
+  for (let i = 0; i < 8; i++) {
+    let balloon = document.createElement("div");
+    balloon.className = "balloon";
+    balloon.innerHTML = "🎈";
+    balloon.style.left = Math.random() * 100 + "vw";
+    balloon.style.animationDuration = (4 + Math.random() * 3) + "s";
+    document.body.appendChild(balloon);
+  }
+}
+
+/* CONFETTI */
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let confetti = [];
+
+function startConfetti() {
+  for (let i = 0; i < 150; i++) {
+    confetti.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 6 + 2,
+      d: Math.random() * 50,
+      color: "hsl(" + Math.random() * 360 + ",100%,50%)"
+    });
+  }
+  loop();
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  confetti.forEach(c => {
+    ctx.fillStyle = c.color;
+    ctx.fillRect(c.x, c.y, c.r, c.r);
+  });
+  update();
+}
+
+function update() {
+  confetti.forEach(c => {
+    c.y += 3;
+    if (c.y > canvas.height) {
+      c.y = -10;
+      c.x = Math.random() * canvas.width;
+    }
+  });
+}
+
+function loop() {
+  draw();
+  requestAnimationFrame(loop);
+}
+
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+</script>
+
+</body>
+</html>
